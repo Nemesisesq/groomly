@@ -7,10 +7,10 @@ import (
 	"github.com/gobuffalo/envy"
 	"github.com/unrolled/secure"
 
-	"github.com/gobuffalo/buffalo/middleware/csrf"
 	"github.com/gobuffalo/buffalo/middleware/i18n"
 	"github.com/gobuffalo/packr"
 	"github.com/nemesisesq/groomly/models"
+	"github.com/gobuffalo/buffalo/middleware/csrf"
 )
 
 // ENV is used to help switch settings based on where the
@@ -29,6 +29,7 @@ func App() *buffalo.App {
 			SessionName: "_groomly_session",
 		})
 		// Automatically redirect to SSL
+		app.Use(Cors())
 		app.Use(forceSSL())
 
 		if ENV == "development" {
@@ -48,7 +49,11 @@ func App() *buffalo.App {
 		app.Use(translations())
 
 		app.GET("/", HomeHandler)
+		//API endpoints
+		api := app.Group("/api")
+		api.Resource("/opportunities", OpportunitiesResource{})
 
+		//RestEndpoints
 		app.Resource("/opportunities", OpportunitiesResource{})
 		app.Resource("/metrics", MetricsResource{})
 		app.Resource("/values", ValuesResource{})
@@ -83,4 +88,14 @@ func forceSSL() buffalo.MiddlewareFunc {
 		SSLRedirect:     ENV == "production",
 		SSLProxyHeaders: map[string]string{"X-Forwarded-Proto": "https"},
 	})
+}
+
+func Cors() buffalo.MiddlewareFunc {
+	return func(next buffalo.Handler) buffalo.Handler {
+		return func(c buffalo.Context) error {
+			next(c)
+			c.Response().Header().Add("Access-Control-Allow-Origin", "*")
+			return nil
+		}
+	}
 }
