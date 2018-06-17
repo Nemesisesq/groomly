@@ -1,0 +1,8 @@
+<div class="page-header">
+  <h1>Edit Value</h1>
+</div>
+
+<%= form_for(value, {action: valuePath({ value_id: value.ID }), method: "PUT"}) { %>
+  <%= partial("values/form.html") %>
+  <a href="<%= valuePath({ value_id: value.ID }) %>" class="btn btn-warning" data-confirm="Are you sure?">Cancel</a>
+<% } %>

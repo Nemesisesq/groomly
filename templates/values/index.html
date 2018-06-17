@@ -1,0 +1,31 @@
+<div class="page-header">
+  <h1>Values</h1>
+</div>
+<ul class="list-unstyled list-inline">
+  <li><a href="<%= newValuesPath() %>" class="btn btn-primary">Create New Value</a></li>
+</ul>
+
+<table class="table table-striped">
+  <thead>
+  <th>Score</th>
+    <th>&nbsp;</th>
+  </thead>
+  <tbody>
+    <%= for (value) in values { %>
+      <tr>
+      <td><%= value.Score %></td>
+        <td>
+          <div class="pull-right">
+            <a href="<%= valuePath({ value_id: value.ID }) %>" class="btn btn-info">View</a>
+            <a href="<%= editValuePath({ value_id: value.ID }) %>" class="btn btn-warning">Edit</a>
+            <a href="<%= valuePath({ value_id: value.ID }) %>" data-method="DELETE" data-confirm="Are you sure?" class="btn btn-danger">Destroy</a>
+          </div>
+        </td>
+      </tr>
+    <% } %>
+  </tbody>
+</table>
+
+<div class="text-center">
+  <%= paginator(pagination) %>
+</div>

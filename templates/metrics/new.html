@@ -1,0 +1,8 @@
+<div class="page-header">
+  <h1>New Metric</h1>
+</div>
+
+<%= form_for(metric, {action: metricsPath(), method: "POST"}) { %>
+  <%= partial("metrics/form.html") %>
+  <a href="<%= metricsPath() %>" class="btn btn-warning" data-confirm="Are you sure?">Cancel</a>
+<% } %>

@@ -1,0 +1,6 @@
+- id: "opportunity.created.success"
+  translation: "Opportunity was successfully created."
+- id: "opportunity.updated.success"
+  translation: "Opportunity was successfully updated."
+- id: "opportunity.destroyed.success"
+  translation: "Opportunity was successfully destroyed."

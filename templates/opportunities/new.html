@@ -1,0 +1,8 @@
+<div class="page-header">
+  <h1>New Opportunity</h1>
+</div>
+
+<%= form_for(opportunity, {action: opportunitiesPath(), method: "POST"}) { %>
+  <%= partial("opportunities/form.html") %>
+  <a href="<%= opportunitiesPath() %>" class="btn btn-warning" data-confirm="Are you sure?">Cancel</a>
+<% } %>

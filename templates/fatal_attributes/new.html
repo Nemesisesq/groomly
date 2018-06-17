@@ -1,0 +1,8 @@
+<div class="page-header">
+  <h1>New FatalAttribute</h1>
+</div>
+
+<%= form_for(fatalAttribute, {action: fatalAttributesPath(), method: "POST"}) { %>
+  <%= partial("fatal_attributes/form.html") %>
+  <a href="<%= fatalAttributesPath() %>" class="btn btn-warning" data-confirm="Are you sure?">Cancel</a>
+<% } %>

@@ -1,0 +1,6 @@
+- id: "project_report.created.success"
+  translation: "ProjectReport was successfully created."
+- id: "project_report.updated.success"
+  translation: "ProjectReport was successfully updated."
+- id: "project_report.destroyed.success"
+  translation: "ProjectReport was successfully destroyed."

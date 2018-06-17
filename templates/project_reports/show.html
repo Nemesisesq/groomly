@@ -1,0 +1,25 @@
+<div class="page-header">
+  <h1>ProjectReport#Show</h1>
+</div>
+
+<ul class="list-unstyled list-inline">
+  <li class="list-inline-item"><a href="<%= projectReportsPath() %>" class="btn btn-info">Back to all ProjectReports</a></li>
+  <li class="list-inline-item"><a href="<%= editProjectReportPath({ project_report_id: projectReport.ID })%>" class="btn btn-warning">Edit</a></li>
+  <li class="list-inline-item"><a href="<%= projectReportPath({ project_report_id: projectReport.ID })%>" data-method="DELETE" data-confirm="Are you sure?" class="btn btn-danger">Destroy</a>
+</ul>
+
+<p>
+  <strong>Name</strong>: <%= projectReport.Name %>
+</p>
+<p>
+  <strong>Summary</strong>: <%= projectReport.Summary %>
+</p>
+<p>
+  <strong>MinHurdle</strong>: <%= projectReport.MinHurdle %>
+</p>
+<p>
+  <strong>MaxHurdle</strong>: <%= projectReport.MaxHurdle %>
+</p>
+<p>
+  <strong>Order</strong>: <%= projectReport.Order %>
+</p>

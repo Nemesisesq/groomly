@@ -1,0 +1,16 @@
+<div class="page-header">
+  <h1>Value#Show</h1>
+</div>
+
+<ul class="list-unstyled list-inline">
+  <li class="list-inline-item"><a href="<%= valuesPath() %>" class="btn btn-info">Back to all Values</a></li>
+  <li class="list-inline-item"><a href="<%= editValuePath({ value_id: value.ID })%>" class="btn btn-warning">Edit</a></li>
+  <li class="list-inline-item"><a href="<%= valuePath({ value_id: value.ID })%>" data-method="DELETE" data-confirm="Are you sure?" class="btn btn-danger">Destroy</a>
+</ul>
+
+<p>
+  <strong>Name</strong>: <%= value.Name %>
+</p>
+<p>
+  <strong>Score</strong>: <%= value.Score %>
+</p>

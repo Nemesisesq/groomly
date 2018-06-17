@@ -1,0 +1,35 @@
+<div class="page-header">
+  <h1>ProjectReports</h1>
+</div>
+<ul class="list-unstyled list-inline">
+  <li><a href="<%= newProjectReportsPath() %>" class="btn btn-primary">Create New ProjectReport</a></li>
+</ul>
+
+<table class="table table-striped">
+  <thead>
+  <th>MinHurdle</th>
+    <th>MaxHurdle</th>
+    <th>Order</th>
+    <th>&nbsp;</th>
+  </thead>
+  <tbody>
+    <%= for (projectReport) in projectReports { %>
+      <tr>
+      <td><%= projectReport.MinHurdle %></td>
+        <td><%= projectReport.MaxHurdle %></td>
+        <td><%= projectReport.Order %></td>
+        <td>
+          <div class="pull-right">
+            <a href="<%= projectReportPath({ project_report_id: projectReport.ID }) %>" class="btn btn-info">View</a>
+            <a href="<%= editProjectReportPath({ project_report_id: projectReport.ID }) %>" class="btn btn-warning">Edit</a>
+            <a href="<%= projectReportPath({ project_report_id: projectReport.ID }) %>" data-method="DELETE" data-confirm="Are you sure?" class="btn btn-danger">Destroy</a>
+          </div>
+        </td>
+      </tr>
+    <% } %>
+  </tbody>
+</table>
+
+<div class="text-center">
+  <%= paginator(pagination) %>
+</div>

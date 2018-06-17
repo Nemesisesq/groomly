@@ -1,0 +1,19 @@
+<div class="page-header">
+  <h1>Opportunity#Show</h1>
+</div>
+
+<ul class="list-unstyled list-inline">
+  <li class="list-inline-item"><a href="<%= opportunitiesPath() %>" class="btn btn-info">Back to all Opportunities</a></li>
+  <li class="list-inline-item"><a href="<%= editOpportunityPath({ opportunity_id: opportunity.ID })%>" class="btn btn-warning">Edit</a></li>
+  <li class="list-inline-item"><a href="<%= opportunityPath({ opportunity_id: opportunity.ID })%>" data-method="DELETE" data-confirm="Are you sure?" class="btn btn-danger">Destroy</a>
+</ul>
+
+<p>
+  <strong>Name</strong>: <%= opportunity.Name %>
+</p>
+<p>
+  <strong>Summary</strong>: <%= opportunity.Summary %>
+</p>
+<p>
+  <strong>BusinessCategory</strong>: <%= opportunity.BusinessCategory %>
+</p>

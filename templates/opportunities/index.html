@@ -1,0 +1,35 @@
+<div class="page-header">
+  <h1>Opportunities</h1>
+</div>
+<ul class="list-unstyled list-inline">
+  <li><a href="<%= newOpportunitiesPath() %>" class="btn btn-primary">Create New Opportunity</a></li>
+</ul>
+
+<table class="table table-striped">
+  <thead>
+  <th>Name</th>
+  <th>Summary</th>
+  <th>BusinessCategory</th>
+    <th>&nbsp;</th>
+  </thead>
+  <tbody>
+    <%= for (opportunity) in opportunities { %>
+      <tr>
+          <td><%= opportunity.Name %></td>
+        <td> <%= opportunity.Summary %> </td>
+      <td><%= opportunity.BusinessCategory %></td>
+        <td>
+          <div class="pull-right">
+            <a href="<%= opportunityPath({ opportunity_id: opportunity.ID }) %>" class="btn btn-info">View</a>
+            <a href="<%= editOpportunityPath({ opportunity_id: opportunity.ID }) %>" class="btn btn-warning">Edit</a>
+            <a href="<%= opportunityPath({ opportunity_id: opportunity.ID }) %>" data-method="DELETE" data-confirm="Are you sure?" class="btn btn-danger">Destroy</a>
+          </div>
+        </td>
+      </tr>
+    <% } %>
+  </tbody>
+</table>
+
+<div class="text-center">
+  <%= paginator(pagination) %>
+</div>

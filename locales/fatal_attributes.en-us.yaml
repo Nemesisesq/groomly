@@ -1,0 +1,6 @@
+- id: "fatal_attribute.created.success"
+  translation: "FatalAttribute was successfully created."
+- id: "fatal_attribute.updated.success"
+  translation: "FatalAttribute was successfully updated."
+- id: "fatal_attribute.destroyed.success"
+  translation: "FatalAttribute was successfully destroyed."

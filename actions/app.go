@@ -49,6 +49,12 @@ func App() *buffalo.App {
 
 		app.GET("/", HomeHandler)
 
+		app.Resource("/opportunities", OpportunitiesResource{})
+		app.Resource("/metrics", MetricsResource{})
+		app.Resource("/values", ValuesResource{})
+		app.Resource("/fatal_attributes", FatalAttributesResource{})
+		app.Resource("/project_reports", ProjectReportsResource{})
+		app.Resource("/project_reports", ProjectReportsResource{})
 		app.ServeFiles("/", assetsBox) // serve files from the public directory
 	}
 

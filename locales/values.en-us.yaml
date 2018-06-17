@@ -1,0 +1,6 @@
+- id: "value.created.success"
+  translation: "Value was successfully created."
+- id: "value.updated.success"
+  translation: "Value was successfully updated."
+- id: "value.destroyed.success"
+  translation: "Value was successfully destroyed."
