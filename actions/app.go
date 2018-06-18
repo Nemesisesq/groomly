@@ -11,6 +11,8 @@ import (
 	"github.com/gobuffalo/packr"
 	"github.com/nemesisesq/groomly/models"
 	"github.com/gobuffalo/buffalo/middleware/csrf"
+	"fmt"
+	"github.com/rs/cors"
 )
 
 // ENV is used to help switch settings based on where the
@@ -29,12 +31,18 @@ func App() *buffalo.App {
 			SessionName: "_groomly_session",
 		})
 		// Automatically redirect to SSL
-		app.Use(Cors())
+		//app.Use(Cors())
 		app.Use(forceSSL())
 
-		if ENV == "development" {
+
+		// Set the request content type to JSON
+		//app.Use(middleware.SetContentType("application/json"))
+
 			app.Use(middleware.ParameterLogger)
-		}
+			app.PreWares = []buffalo.PreWare{cors.New(cors.Options{
+				AllowedOrigins:   []string{"*"},
+				AllowedMethods:   []string{"GET", "POST", "PUT", "DELETE"},
+			}).Handler}
 
 		// Protect against CSRF attacks. https://www.owasp.org/index.php/Cross-Site_Request_Forgery_(CSRF)
 		// Remove to disable this.
@@ -95,6 +103,7 @@ func Cors() buffalo.MiddlewareFunc {
 		return func(c buffalo.Context) error {
 			next(c)
 			c.Response().Header().Add("Access-Control-Allow-Origin", "*")
+			fmt.Println("Set Header")
 			return nil
 		}
 	}
