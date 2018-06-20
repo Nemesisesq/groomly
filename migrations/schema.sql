@@ -92,7 +92,7 @@ CREATE TABLE project_reports (
     summary text NOT NULL,
     min_hurdle integer NOT NULL,
     max_hurdle integer NOT NULL,
-    "order" integer NOT NULL,
+    rank integer NOT NULL,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL
 );

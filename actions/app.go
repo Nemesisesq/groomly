@@ -60,6 +60,11 @@ func App() *buffalo.App {
 		//API endpoints
 		api := app.Group("/api")
 		api.Resource("/opportunities", OpportunitiesResource{})
+		api.Resource("/metrics", MetricsResource{})
+		api.Resource("/values", ValuesResource{})
+		api.Resource("/fatal_attributes", FatalAttributesResource{})
+		api.Resource("/project_reports", ProjectReportsResource{})
+		api.Resource("/project_reports", ProjectReportsResource{})
 
 		//RestEndpoints
 		app.Resource("/opportunities", OpportunitiesResource{})

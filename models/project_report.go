@@ -18,7 +18,7 @@ type ProjectReport struct {
 	Summary   string    `json:"summary" db:"summary"`
 	MinHurdle int   `json:"min_hurdle" db:"min_hurdle"`
 	MaxHurdle int   `json:"max_hurdle" db:"max_hurdle"`
-	Order     int   `json:"order" db:"order"`
+	Rank    int   `json:"rank" db:"rank"`
 }
 
 // String is not required by pop and may be deleted
