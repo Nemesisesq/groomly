@@ -43,7 +43,8 @@ CREATE TABLE fatal_attributes (
     name text NOT NULL,
     weight integer NOT NULL,
     created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
+    updated_at timestamp without time zone NOT NULL,
+    summary text
 );
 
 
