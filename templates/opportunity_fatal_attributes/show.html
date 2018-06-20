@@ -1,0 +1,16 @@
+<div class="page-header">
+  <h1>OpportunityFatalAttribute#Show</h1>
+</div>
+
+<ul class="list-unstyled list-inline">
+  <li class="list-inline-item"><a href="<%= opportunityFatalAttributesPath() %>" class="btn btn-info">Back to all OpportunityFatalAttributes</a></li>
+  <li class="list-inline-item"><a href="<%= editOpportunityFatalAttributePath({ opportunity_fatal_attribute_id: opportunityFatalAttribute.ID })%>" class="btn btn-warning">Edit</a></li>
+  <li class="list-inline-item"><a href="<%= opportunityFatalAttributePath({ opportunity_fatal_attribute_id: opportunityFatalAttribute.ID })%>" data-method="DELETE" data-confirm="Are you sure?" class="btn btn-danger">Destroy</a>
+</ul>
+
+<p>
+  <strong>OpportunityID</strong>: <%= opportunityFatalAttribute.OpportunityID %>
+</p>
+<p>
+  <strong>FatalAttributesID</strong>: <%= opportunityFatalAttribute.FatalAttributesID %>
+</p>

@@ -1,0 +1,8 @@
+<div class="page-header">
+  <h1>Edit MetricValue</h1>
+</div>
+
+<%= form_for(metricValue, {action: metricValuePath({ metric_value_id: metricValue.ID }), method: "PUT"}) { %>
+  <%= partial("metric_values/form.html") %>
+  <a href="<%= metricValuePath({ metric_value_id: metricValue.ID }) %>" class="btn btn-warning" data-confirm="Are you sure?">Cancel</a>
+<% } %>

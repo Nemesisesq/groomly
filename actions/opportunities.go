@@ -47,7 +47,6 @@ func (v OpportunitiesResource) List(c buffalo.Context) error {
 	// Add the paginator to the context so it can be used in the template.
 	c.Set("pagination", q.Paginator)
 
-
 	return c.Render(200, r.Auto(c, opportunities))
 }
 

@@ -15,8 +15,8 @@ type FatalAttribute struct {
 	CreatedAt time.Time `json:"created_at" db:"created_at"`
 	UpdatedAt time.Time `json:"updated_at" db:"updated_at"`
 	Name      string    `json:"name" db:"name"`
-	Weight    int   `json:"weight" db:"weight"`
-	Summary string `json:"summary" db:"summary"`
+	Weight    int       `json:"weight" db:"weight"`
+	Summary   string    `json:"summary" db:"summary"`
 }
 
 // String is not required by pop and may be deleted

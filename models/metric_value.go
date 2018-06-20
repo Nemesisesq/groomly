@@ -7,48 +7,47 @@ import (
 	"github.com/gobuffalo/pop"
 	"github.com/gobuffalo/uuid"
 	"github.com/gobuffalo/validate"
-	"github.com/gobuffalo/validate/validators"
 )
 
-type Value struct {
+type MetricValue struct {
 	ID        uuid.UUID `json:"id" db:"id"`
 	CreatedAt time.Time `json:"created_at" db:"created_at"`
 	UpdatedAt time.Time `json:"updated_at" db:"updated_at"`
-	Name      string    `json:"name" db:"name"`
-	Score     int       `json:"score" db:"score"`
+	MetricID  uuid.UUID `json:"metric_id" db:"metric_id"`
+	Metric    Metric    `json:"metric" db:"-"`
+	ValueID   uuid.UUID `json:"value_id" db:"value_id"`
+	Value     Value     `json:"value" db:"-"`
 }
 
 // String is not required by pop and may be deleted
-func (v Value) String() string {
-	jv, _ := json.Marshal(v)
-	return string(jv)
+func (m MetricValue) String() string {
+	jm, _ := json.Marshal(m)
+	return string(jm)
 }
 
-// Values is not required by pop and may be deleted
-type Values []Value
+// MetricValues is not required by pop and may be deleted
+type MetricValues []MetricValue
 
 // String is not required by pop and may be deleted
-func (v Values) String() string {
-	jv, _ := json.Marshal(v)
-	return string(jv)
+func (m MetricValues) String() string {
+	jm, _ := json.Marshal(m)
+	return string(jm)
 }
 
 // Validate gets run every time you call a "pop.Validate*" (pop.ValidateAndSave, pop.ValidateAndCreate, pop.ValidateAndUpdate) method.
 // This method is not required and may be deleted.
-func (v *Value) Validate(tx *pop.Connection) (*validate.Errors, error) {
-	return validate.Validate(
-		&validators.StringIsPresent{Field: v.Name, Name: "Name"},
-	), nil
+func (m *MetricValue) Validate(tx *pop.Connection) (*validate.Errors, error) {
+	return validate.NewErrors(), nil
 }
 
 // ValidateCreate gets run every time you call "pop.ValidateAndCreate" method.
 // This method is not required and may be deleted.
-func (v *Value) ValidateCreate(tx *pop.Connection) (*validate.Errors, error) {
+func (m *MetricValue) ValidateCreate(tx *pop.Connection) (*validate.Errors, error) {
 	return validate.NewErrors(), nil
 }
 
 // ValidateUpdate gets run every time you call "pop.ValidateAndUpdate" method.
 // This method is not required and may be deleted.
-func (v *Value) ValidateUpdate(tx *pop.Connection) (*validate.Errors, error) {
+func (m *MetricValue) ValidateUpdate(tx *pop.Connection) (*validate.Errors, error) {
 	return validate.NewErrors(), nil
 }

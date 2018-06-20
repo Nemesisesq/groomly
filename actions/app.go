@@ -7,11 +7,12 @@ import (
 	"github.com/gobuffalo/envy"
 	"github.com/unrolled/secure"
 
+	"fmt"
+
+	"github.com/gobuffalo/buffalo/middleware/csrf"
 	"github.com/gobuffalo/buffalo/middleware/i18n"
 	"github.com/gobuffalo/packr"
 	"github.com/nemesisesq/groomly/models"
-	"github.com/gobuffalo/buffalo/middleware/csrf"
-	"fmt"
 	"github.com/rs/cors"
 )
 
@@ -34,15 +35,14 @@ func App() *buffalo.App {
 		//app.Use(Cors())
 		app.Use(forceSSL())
 
-
 		// Set the request content type to JSON
 		//app.Use(middleware.SetContentType("application/json"))
 
-			app.Use(middleware.ParameterLogger)
-			app.PreWares = []buffalo.PreWare{cors.New(cors.Options{
-				AllowedOrigins:   []string{"*"},
-				AllowedMethods:   []string{"GET", "POST", "PUT", "DELETE"},
-			}).Handler}
+		app.Use(middleware.ParameterLogger)
+		app.PreWares = []buffalo.PreWare{cors.New(cors.Options{
+			AllowedOrigins: []string{"*"},
+			AllowedMethods: []string{"GET", "POST", "PUT", "DELETE"},
+		}).Handler}
 
 		// Protect against CSRF attacks. https://www.owasp.org/index.php/Cross-Site_Request_Forgery_(CSRF)
 		// Remove to disable this.
@@ -73,6 +73,9 @@ func App() *buffalo.App {
 		app.Resource("/fatal_attributes", FatalAttributesResource{})
 		app.Resource("/project_reports", ProjectReportsResource{})
 		app.Resource("/project_reports", ProjectReportsResource{})
+		app.Resource("/opportunity_metrics", OpportunityMetricsResource{})
+		app.Resource("/metric_values", MetricValuesResource{})
+		app.Resource("/opportunity_fatal_attributes", OpportunityFatalAttributesResource{})
 		app.ServeFiles("/", assetsBox) // serve files from the public directory
 	}
 

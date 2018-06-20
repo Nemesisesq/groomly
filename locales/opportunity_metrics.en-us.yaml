@@ -1,0 +1,6 @@
+- id: "opportunity_metric.created.success"
+  translation: "OpportunityMetric was successfully created."
+- id: "opportunity_metric.updated.success"
+  translation: "OpportunityMetric was successfully updated."
+- id: "opportunity_metric.destroyed.success"
+  translation: "OpportunityMetric was successfully destroyed."

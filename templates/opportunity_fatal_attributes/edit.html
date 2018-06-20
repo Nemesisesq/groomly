@@ -1,0 +1,8 @@
+<div class="page-header">
+  <h1>Edit OpportunityFatalAttribute</h1>
+</div>
+
+<%= form_for(opportunityFatalAttribute, {action: opportunityFatalAttributePath({ opportunity_fatal_attribute_id: opportunityFatalAttribute.ID }), method: "PUT"}) { %>
+  <%= partial("opportunity_fatal_attributes/form.html") %>
+  <a href="<%= opportunityFatalAttributePath({ opportunity_fatal_attribute_id: opportunityFatalAttribute.ID }) %>" class="btn btn-warning" data-confirm="Are you sure?">Cancel</a>
+<% } %>

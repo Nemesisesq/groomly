@@ -1,0 +1,5 @@
+create_table("opportunity_fatal_attributes", func(t) {
+	t.Column("id", "uuid", {"primary": true})
+	t.Column("opportunity_id", "uuid", {})
+	t.Column("fatal_attributes_id", "uuid", {})
+})

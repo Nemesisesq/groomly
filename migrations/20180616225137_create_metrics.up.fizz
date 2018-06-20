@@ -2,6 +2,5 @@ create_table("metrics", func(t) {
 	t.Column("id", "uuid", {"primary": true})
 	t.Column("name", "text", {})
 	t.Column("weight", "integer", {})
-	t.Column("value", "string", {})
 	t.Column("type", "integer", {})
 })

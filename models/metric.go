@@ -16,7 +16,7 @@ type Metric struct {
 	UpdatedAt time.Time `json:"updated_at" db:"updated_at"`
 	Name      string    `json:"name" db:"name"`
 	Weight    int       `json:"weight" db:"weight"`
-	Value     string    `json:"value" db:"value"`
+	Value     Value     `json:"value" many_to_many:"metric_values"`
 	Type      int       `json:"type" db:"type"`
 }
 

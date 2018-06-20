@@ -1,0 +1,6 @@
+- id: "metric_value.created.success"
+  translation: "MetricValue was successfully created."
+- id: "metric_value.updated.success"
+  translation: "MetricValue was successfully updated."
+- id: "metric_value.destroyed.success"
+  translation: "MetricValue was successfully destroyed."

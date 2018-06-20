@@ -16,9 +16,9 @@ type ProjectReport struct {
 	UpdatedAt time.Time `json:"updated_at" db:"updated_at"`
 	Name      string    `json:"name" db:"name"`
 	Summary   string    `json:"summary" db:"summary"`
-	MinHurdle int   `json:"min_hurdle" db:"min_hurdle"`
-	MaxHurdle int   `json:"max_hurdle" db:"max_hurdle"`
-	Rank    int   `json:"rank" db:"rank"`
+	MinHurdle int       `json:"min_hurdle" db:"min_hurdle"`
+	MaxHurdle int       `json:"max_hurdle" db:"max_hurdle"`
+	Rank      int       `json:"rank" db:"rank"`
 }
 
 // String is not required by pop and may be deleted

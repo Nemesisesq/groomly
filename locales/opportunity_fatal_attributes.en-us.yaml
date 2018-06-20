@@ -1,0 +1,6 @@
+- id: "opportunity_fatal_attribute.created.success"
+  translation: "OpportunityFatalAttribute was successfully created."
+- id: "opportunity_fatal_attribute.updated.success"
+  translation: "OpportunityFatalAttribute was successfully updated."
+- id: "opportunity_fatal_attribute.destroyed.success"
+  translation: "OpportunityFatalAttribute was successfully destroyed."
