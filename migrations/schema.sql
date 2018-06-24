@@ -51,6 +51,21 @@ CREATE TABLE fatal_attributes (
 ALTER TABLE fatal_attributes OWNER TO postgres;
 
 --
+-- Name: metric_values; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE metric_values (
+    id uuid NOT NULL,
+    metric_id uuid NOT NULL,
+    value_id uuid NOT NULL,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+ALTER TABLE metric_values OWNER TO postgres;
+
+--
 -- Name: metrics; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -82,6 +97,36 @@ CREATE TABLE opportunities (
 
 
 ALTER TABLE opportunities OWNER TO postgres;
+
+--
+-- Name: opportunity_fatal_attributes; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE opportunity_fatal_attributes (
+    id uuid NOT NULL,
+    opportunity_id uuid NOT NULL,
+    fatal_attributes_id uuid NOT NULL,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+ALTER TABLE opportunity_fatal_attributes OWNER TO postgres;
+
+--
+-- Name: opportunity_metrics; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE opportunity_metrics (
+    id uuid NOT NULL,
+    opportunity_id uuid NOT NULL,
+    metric_id uuid NOT NULL,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+ALTER TABLE opportunity_metrics OWNER TO postgres;
 
 --
 -- Name: project_reports; Type: TABLE; Schema: public; Owner: postgres
@@ -136,6 +181,14 @@ ALTER TABLE ONLY fatal_attributes
 
 
 --
+-- Name: metric_values metric_values_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY metric_values
+    ADD CONSTRAINT metric_values_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: metrics metrics_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -149,6 +202,22 @@ ALTER TABLE ONLY metrics
 
 ALTER TABLE ONLY opportunities
     ADD CONSTRAINT opportunities_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: opportunity_fatal_attributes opportunity_fatal_attributes_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY opportunity_fatal_attributes
+    ADD CONSTRAINT opportunity_fatal_attributes_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: opportunity_metrics opportunity_metrics_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY opportunity_metrics
+    ADD CONSTRAINT opportunity_metrics_pkey PRIMARY KEY (id);
 
 
 --
