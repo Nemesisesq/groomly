@@ -73,7 +73,6 @@ CREATE TABLE metrics (
     id uuid NOT NULL,
     name text NOT NULL,
     weight integer NOT NULL,
-    value character varying(255) NOT NULL,
     type integer NOT NULL,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL

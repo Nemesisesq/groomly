@@ -11,14 +11,14 @@ import (
 )
 
 type Opportunity struct {
-	ID               uuid.UUID `json:"id" db:"id"`
-	CreatedAt        time.Time `json:"created_at" db:"created_at"`
-	UpdatedAt        time.Time `json:"updated_at" db:"updated_at"`
-	Name             string    `json:"name" db:"name"`
-	Summary          string    `json:"summary" db:"summary"`
-	BusinessCategory string    `json:"business_category" db:"business_category"`
-	Metrics          Metrics   `json:"metrics" many_to_many:"opportunity_metrics"`
-	FatalAttributes FatalAttributes `many_to_many:"opportunity_fatal_attribute"`
+	ID               uuid.UUID       `json:"id" db:"id"`
+	CreatedAt        time.Time       `json:"created_at" db:"created_at"`
+	UpdatedAt        time.Time       `json:"updated_at" db:"updated_at"`
+	Name             string          `json:"name" db:"name"`
+	Summary          string          `json:"summary" db:"summary"`
+	BusinessCategory string          `json:"business_category" db:"business_category"`
+	Metrics          Metrics         `json:"metrics" many_to_many:"opportunity_metrics"`
+	FatalAttributes  FatalAttributes `many_to_many:"opportunity_fatal_attribute"`
 }
 
 // String is not required by pop and may be deleted

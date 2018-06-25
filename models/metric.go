@@ -10,14 +10,21 @@ import (
 	"github.com/gobuffalo/validate/validators"
 )
 
+type Type int
+
+const (
+	Benefit Type = iota + 1
+	Effort
+)
+
 type Metric struct {
 	ID        uuid.UUID `json:"id" db:"id"`
 	CreatedAt time.Time `json:"created_at" db:"created_at"`
 	UpdatedAt time.Time `json:"updated_at" db:"updated_at"`
 	Name      string    `json:"name" db:"name"`
 	Weight    int       `json:"weight" db:"weight"`
-	Value     Value     `json:"value" many_to_many:"metric_values"`
-	Type      int       `json:"type" db:"type"`
+	Value     Value     `json:"value" has_one:"value"`
+	Type      Type      `json:"type" db:"type"`
 }
 
 // String is not required by pop and may be deleted
@@ -41,8 +48,6 @@ func (m *Metric) Validate(tx *pop.Connection) (*validate.Errors, error) {
 	return validate.Validate(
 		&validators.StringIsPresent{Field: m.Name, Name: "Name"},
 		&validators.IntIsPresent{Field: m.Weight, Name: "Weight"},
-		&validators.StringIsPresent{Field: m.Value, Name: "Value"},
-		&validators.IntIsPresent{Field: m.Type, Name: "Type"},
 	), nil
 }
 
