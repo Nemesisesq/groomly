@@ -16,4 +16,13 @@ var _ = grift.Namespace("db", func() {
 		return nil
 	})
 
+	grift.Desc("reset", "Resets and seed a database")
+	grift.Add("reset", func(c *grift.Context) error {
+		grift.Run("db:drop", c)
+		grift.Run("db:create", c)
+		grift.Run("db:migrate", c)
+		//grift.Run("db:seed", c )
+		return nil
+	})
+
 })

@@ -18,13 +18,15 @@ const (
 )
 
 type Metric struct {
-	ID        uuid.UUID `json:"id" db:"id"`
-	CreatedAt time.Time `json:"created_at" db:"created_at"`
-	UpdatedAt time.Time `json:"updated_at" db:"updated_at"`
-	Name      string    `json:"name" db:"name"`
-	Weight    int       `json:"weight" db:"weight"`
-	Value     Value     `json:"value" has_one:"value"`
-	Type      Type      `json:"type" db:"type"`
+	ID          uuid.UUID   `json:"id" db:"id"`
+	CreatedAt   time.Time   `json:"created_at" db:"created_at"`
+	UpdatedAt   time.Time   `json:"updated_at" db:"updated_at"`
+	Name        string      `json:"name" db:"name"`
+	Weight      int         `json:"weight" db:"weight"`
+	Value       Value       `json:"value" has_one:"value"`
+	Type        Type        `json:"type" db:"type"`
+	Opportunity Opportunity `belongs_to:"opportunity"`
+	OpportunityID uuid.UUID `db:"opportunity_id"`
 }
 
 // String is not required by pop and may be deleted

@@ -74,6 +74,7 @@ CREATE TABLE metrics (
     name text NOT NULL,
     weight integer NOT NULL,
     type integer NOT NULL,
+    opportunity_id uuid NOT NULL,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL
 );
