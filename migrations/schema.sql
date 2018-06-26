@@ -104,7 +104,7 @@ ALTER TABLE opportunities OWNER TO postgres;
 CREATE TABLE opportunity_fatal_attributes (
     id uuid NOT NULL,
     opportunity_id uuid NOT NULL,
-    fatal_attributes_id uuid NOT NULL,
+    fatal_attribute_id uuid NOT NULL,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL
 );

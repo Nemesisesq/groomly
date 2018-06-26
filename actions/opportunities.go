@@ -40,7 +40,7 @@ func (v OpportunitiesResource) List(c buffalo.Context) error {
 	q := tx.PaginateFromParams(c.Params())
 
 	// Retrieve all Opportunities from the DB
-	if err := q.All(opportunities); err != nil {
+	if err := q.Eager().All(opportunities); err != nil {
 		return errors.WithStack(err)
 	}
 

@@ -15,7 +15,7 @@ type OpportunityFatalAttribute struct {
 	UpdatedAt         time.Time      `json:"updated_at" db:"updated_at"`
 	OpportunityID     uuid.UUID      `json:"opportunity_id" db:"opportunity_id"`
 	Opportunity       Opportunity    `db:"-"`
-	FatalAttributesID uuid.UUID      `json:"fatal_attributes_id" db:"fatal_attributes_id"`
+	FatalAttributeID uuid.UUID      `json:"fatal_attribute_id" db:"fatal_attribute_id"`
 	FatalAttribute    FatalAttribute `db:"-"`
 }
 
