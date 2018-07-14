@@ -12,7 +12,7 @@ var _ error = Namespace("seed", func() {
 
 	Desc("values", "This task seed values in the database")
 	Add("values", func(c *Context) error {
-		values := models.Values{
+		_ = models.Values{
 			{Name: "< $5k", Score: 1},
 			{Name: "$5k - 10k", Score: 2},
 			{Name: "$11k - 25k", Score: 3},
@@ -44,20 +44,20 @@ var _ error = Namespace("seed", func() {
 			{Name: "> 2,000", Score: 5},
 		}
 
-		tx, err := pop.Connect("development")
+		_, err := pop.Connect("development")
 		if err != nil {
 			log.Panic(err)
 		}
 
-		for _, v := range values {
-			err := tx.Create(&v)
+		//for _, v := range values {
+		//	err := tx.Create(&v)
+		//
+		//	if err != nil {
+		//		log.Panic(err)
+		//	}
+		//}
 
-			if err != nil {
-				log.Panic(err)
-			}
-		}
-
-		return err
+		return nil
 	})
 
 })

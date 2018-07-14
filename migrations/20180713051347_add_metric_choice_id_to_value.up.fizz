@@ -1,0 +1,1 @@
+add_column("values", "metric_choice_id", "uuid", {"null":true})

@@ -1,0 +1,1 @@
+drop_column("metrics","chosen_value_id")

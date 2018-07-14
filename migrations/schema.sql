@@ -76,7 +76,8 @@ CREATE TABLE metrics (
     type integer NOT NULL,
     opportunity_id uuid NOT NULL,
     created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
+    updated_at timestamp without time zone NOT NULL,
+    chosen_value_id uuid
 );
 
 
@@ -166,7 +167,8 @@ CREATE TABLE "values" (
     name text NOT NULL,
     score integer NOT NULL,
     created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
+    updated_at timestamp without time zone NOT NULL,
+    metric_choice_id uuid
 );
 
 

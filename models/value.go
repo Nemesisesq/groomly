@@ -11,11 +11,12 @@ import (
 )
 
 type Value struct {
-	ID        uuid.UUID `json:"id" db:"id"`
-	CreatedAt time.Time `json:"created_at" db:"created_at"`
-	UpdatedAt time.Time `json:"updated_at" db:"updated_at"`
-	Name      string    `json:"name" db:"name"`
-	Score     int       `json:"score" db:"score"`
+	ID             uuid.UUID `json:"id" db:"id"`
+	CreatedAt      time.Time `json:"created_at" db:"created_at"`
+	UpdatedAt      time.Time `json:"updated_at" db:"updated_at"`
+	Name           string    `json:"name" db:"name"`
+	Score          int       `json:"score" db:"score"`
+	MetricChoiceID uuid.UUID `db:"metric_choice_id"`
 }
 
 // String is not required by pop and may be deleted

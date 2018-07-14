@@ -18,7 +18,7 @@ type Opportunity struct {
 	Summary          string          `json:"summary" db:"summary"`
 	BusinessCategory string          `json:"business_category" db:"business_category"`
 	Metrics          Metrics         `json:"metrics"has_many:"metrics"`
-	FatalAttributes  FatalAttributes `json:"fatal_attributes" many_to_many:"opportunity_fatal_attribute"`
+	FatalAttributes  FatalAttributes `json:"fatal_attributes" many_to_many:"opportunity_fatal_attributes"`
 }
 
 // String is not required by pop and may be deleted
