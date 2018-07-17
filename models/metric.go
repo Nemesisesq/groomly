@@ -51,7 +51,6 @@ func (m Metrics) String() string {
 func (m *Metric) Validate(tx *pop.Connection) (*validate.Errors, error) {
 	return validate.Validate(
 		&validators.StringIsPresent{Field: m.Name, Name: "Name"},
-		&validators.IntIsPresent{Field: m.Weight, Name: "Weight"},
 	), nil
 }
 

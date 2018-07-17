@@ -40,7 +40,7 @@ func (v MetricsResource) List(c buffalo.Context) error {
 	q := tx.PaginateFromParams(c.Params())
 
 	// Retrieve all Metrics from the DB
-	if err := q.All(metrics); err != nil {
+	if err := q.Eager().All(metrics); err != nil {
 		return errors.WithStack(err)
 	}
 

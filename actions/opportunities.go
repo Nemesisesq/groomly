@@ -63,7 +63,7 @@ func (v OpportunitiesResource) Show(c buffalo.Context) error {
 	opportunity := &models.Opportunity{}
 
 	// To find the Opportunity the parameter opportunity_id is used.
-	if err := tx.Find(opportunity, c.Param("opportunity_id")); err != nil {
+	if err := tx.Eager().Find(opportunity, c.Param("opportunity_id")); err != nil {
 		return c.Error(404, err)
 	}
 
@@ -106,6 +106,35 @@ func (v OpportunitiesResource) Create(c buffalo.Context) error {
 		// Render again the new.html template that the user can
 		// correct the input.
 		return c.Render(422, r.Auto(c, opportunity))
+	}
+	// create metrics
+
+	for _, v := range opportunity.Metrics {
+
+		err := tx.Where("name = ?", v.Name ).First(v)
+
+		if err != nil {
+			return errors.WithStack(err)
+		}
+
+		// link Metrics with The Opportunity
+
+		oppo_met := models.OpportunityMetric{OpportunityID: opportunity.ID, MetricID: v.ID}
+
+		verrs, err = tx.ValidateAndCreate(oppo_met)
+
+		if err != nil {
+			return errors.WithStack(err)
+		}
+
+		if verrs.HasAny() {
+			// Make the errors available inside the html template
+			c.Set("errors", verrs)
+
+			// Render again the new.html template that the user can
+			// correct the input.
+			return c.Render(422, r.Auto(c, opportunity))
+		}
 	}
 
 	// If there are no errors set a success message
@@ -196,7 +225,6 @@ func (v OpportunitiesResource) Destroy(c buffalo.Context) error {
 	if err := tx.Destroy(opportunity); err != nil {
 		return errors.WithStack(err)
 	}
-
 	// If there are no errors set a flash message
 	c.Flash().Add("success", "Opportunity was destroyed successfully")
 

@@ -60,7 +60,7 @@ var _ = Namespace("seed", func() {
 				}},
 
 			{
-				"M": models.Metric{Name: "Finance Team", Type: models.Effort},
+				"M": models.Metric{Name: "Finance Team", Type: models.Effort, Weight:1},
 				"V": models.Values{
 					{Name: "Small", Score: 1},
 					{Name: "Medium", Score: 2},
