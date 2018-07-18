@@ -60,7 +60,7 @@ var _ = Namespace("seed", func() {
 				}},
 
 			{
-				"M": models.Metric{Name: "Finance Team", Type: models.Effort, Weight:1},
+				"M": models.Metric{Name: "Finance Team", Type: models.Effort, Weight: 1},
 				"V": models.Values{
 					{Name: "Small", Score: 1},
 					{Name: "Medium", Score: 2},
@@ -114,14 +114,11 @@ var _ = Namespace("seed", func() {
 				log.Panic(err)
 			}
 			for _, v := range vals {
-				v.MetricChoiceID = met.ID
 				tx.Create(&v)
 				if err != nil {
 					log.Panic(err)
 				}
 			}
-
-
 
 		}
 

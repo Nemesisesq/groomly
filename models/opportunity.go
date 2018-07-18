@@ -17,7 +17,7 @@ type Opportunity struct {
 	Name             string          `json:"name" db:"name"`
 	Summary          string          `json:"summary" db:"summary"`
 	BusinessCategory string          `json:"business_category" db:"business_category"`
-	Metrics          Metrics         `json:"metrics" many_to_many:"opportunity_metrics"`
+	MetricValues     MetricValues    `json:"metric_values" has_many:"metric_values"`
 	FatalAttributes  FatalAttributes `json:"fatal_attributes" many_to_many:"opportunity_fatal_attributes"`
 }
 

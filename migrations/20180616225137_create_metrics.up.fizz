@@ -3,5 +3,4 @@ create_table("metrics", func(t) {
 	t.Column("name", "text", {})
 	t.Column("weight", "integer", {})
 	t.Column("type", "integer", {})
-	t.Column("opportunity_id", "uuid", {})
 })

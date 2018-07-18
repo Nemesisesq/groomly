@@ -1,1 +1,0 @@
-add_column("metrics","chosen_value_id", "uuid", {"null":true})

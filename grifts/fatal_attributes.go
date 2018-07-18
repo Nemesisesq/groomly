@@ -1,10 +1,11 @@
 package grifts
 
 import (
+	"log"
+
+	"github.com/gobuffalo/pop"
 	. "github.com/markbates/grift/grift"
 	"github.com/nemesisesq/groomly/models"
-	"log"
-	"github.com/gobuffalo/pop"
 )
 
 var _ = Namespace("seed", func() {
@@ -13,8 +14,7 @@ var _ = Namespace("seed", func() {
 	Add("fatal_attributes", func(c *Context) error {
 
 		fa := models.FatalAttributes{
-			{Name:"Regulatory", Summary:"The Goverment really cares about this one"},
-
+			{Name: "Regulatory", Summary: "The Goverment really cares about this one"},
 		}
 
 		tx, err := pop.Connect("development")

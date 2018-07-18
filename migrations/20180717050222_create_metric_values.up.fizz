@@ -2,4 +2,5 @@ create_table("metric_values", func(t) {
 	t.Column("id", "uuid", {"primary": true})
 	t.Column("metric_id", "uuid", {})
 	t.Column("value_id", "uuid", {})
+	t.Column("opportunity_id", "uuid", {})
 })

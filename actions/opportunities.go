@@ -109,19 +109,17 @@ func (v OpportunitiesResource) Create(c buffalo.Context) error {
 	}
 	// create metrics
 
-	for _, v := range opportunity.Metrics {
+	for _, v := range opportunity.MetricValues {
 
-		err := tx.Where("name = ?", v.Name ).First(v)
-
-		if err != nil {
-			return errors.WithStack(err)
-		}
+   		v.OpportunityID = opportunity.ID
+   		v.MetricID = v.Metric.ID
+   		v.ValueID = v.Value.ID
 
 		// link Metrics with The Opportunity
 
-		oppo_met := models.OpportunityMetric{OpportunityID: opportunity.ID, MetricID: v.ID}
 
-		verrs, err = tx.ValidateAndCreate(oppo_met)
+       verrs, err = tx.ValidateAndCreate(v)
+
 
 		if err != nil {
 			return errors.WithStack(err)

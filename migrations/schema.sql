@@ -42,9 +42,9 @@ CREATE TABLE fatal_attributes (
     id uuid NOT NULL,
     name text NOT NULL,
     weight integer NOT NULL,
+    summary text,
     created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL,
-    summary text
+    updated_at timestamp without time zone NOT NULL
 );
 
 
@@ -58,6 +58,7 @@ CREATE TABLE metric_values (
     id uuid NOT NULL,
     metric_id uuid NOT NULL,
     value_id uuid NOT NULL,
+    opportunity_id uuid NOT NULL,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL
 );
@@ -74,10 +75,8 @@ CREATE TABLE metrics (
     name text NOT NULL,
     weight integer NOT NULL,
     type integer NOT NULL,
-    opportunity_id uuid NOT NULL,
     created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL,
-    chosen_value_id uuid
+    updated_at timestamp without time zone NOT NULL
 );
 
 
@@ -113,21 +112,6 @@ CREATE TABLE opportunity_fatal_attributes (
 
 
 ALTER TABLE opportunity_fatal_attributes OWNER TO postgres;
-
---
--- Name: opportunity_metrics; Type: TABLE; Schema: public; Owner: postgres
---
-
-CREATE TABLE opportunity_metrics (
-    id uuid NOT NULL,
-    opportunity_id uuid NOT NULL,
-    metric_id uuid NOT NULL,
-    created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
-);
-
-
-ALTER TABLE opportunity_metrics OWNER TO postgres;
 
 --
 -- Name: project_reports; Type: TABLE; Schema: public; Owner: postgres
@@ -166,9 +150,9 @@ CREATE TABLE "values" (
     id uuid NOT NULL,
     name text NOT NULL,
     score integer NOT NULL,
+    metric_choice_id uuid NOT NULL,
     created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL,
-    metric_choice_id uuid
+    updated_at timestamp without time zone NOT NULL
 );
 
 
@@ -212,14 +196,6 @@ ALTER TABLE ONLY opportunities
 
 ALTER TABLE ONLY opportunity_fatal_attributes
     ADD CONSTRAINT opportunity_fatal_attributes_pkey PRIMARY KEY (id);
-
-
---
--- Name: opportunity_metrics opportunity_metrics_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY opportunity_metrics
-    ADD CONSTRAINT opportunity_metrics_pkey PRIMARY KEY (id);
 
 
 --

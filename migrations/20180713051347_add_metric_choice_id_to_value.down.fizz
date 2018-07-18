@@ -1,1 +1,0 @@
-drop_column("values", "metric_choice_id")

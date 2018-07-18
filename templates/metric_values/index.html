@@ -8,18 +8,14 @@
 <table class="table table-striped">
   <thead>
   <th>MetricID</th>
-    <th>Metric</th>
     <th>ValueID</th>
-    <th>Value</th>
     <th>&nbsp;</th>
   </thead>
   <tbody>
     <%= for (metricValue) in metricValues { %>
       <tr>
       <td><%= metricValue.MetricID %></td>
-        <td><%= metricValue.Metric %></td>
         <td><%= metricValue.ValueID %></td>
-        <td><%= metricValue.Value %></td>
         <td>
           <div class="pull-right">
             <a href="<%= metricValuePath({ metric_value_id: metricValue.ID }) %>" class="btn btn-info">View</a>

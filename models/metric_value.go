@@ -10,13 +10,14 @@ import (
 )
 
 type MetricValue struct {
-	ID        uuid.UUID `json:"id" db:"id"`
-	CreatedAt time.Time `json:"created_at" db:"created_at"`
-	UpdatedAt time.Time `json:"updated_at" db:"updated_at"`
-	MetricID  uuid.UUID `json:"metric_id" db:"metric_id"`
-	Metric    Metric    `json:"metric" db:"-"`
-	ValueID   uuid.UUID `json:"value_id" db:"value_id"`
-	Value     Value     `json:"value" db:"-"`
+	ID            uuid.UUID `json:"id" db:"id"`
+	CreatedAt     time.Time `json:"created_at" db:"created_at"`
+	UpdatedAt     time.Time `json:"updated_at" db:"updated_at"`
+	Metric        Metric    `json:"metric" db:"-"`
+	MetricID      uuid.UUID `json:"metric_id" db:"metric_id"`
+	Value         Value     `json:"value" db:"-"`
+	ValueID       uuid.UUID `json:"value_id" db:"value_id"`
+	OpportunityID uuid.UUID `json:"opportunity_id" db:"opportunity_id"`
 }
 
 // String is not required by pop and may be deleted

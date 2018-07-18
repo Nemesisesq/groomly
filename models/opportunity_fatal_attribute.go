@@ -10,13 +10,13 @@ import (
 )
 
 type OpportunityFatalAttribute struct {
-	ID                uuid.UUID      `json:"id" db:"id"`
-	CreatedAt         time.Time      `json:"created_at" db:"created_at"`
-	UpdatedAt         time.Time      `json:"updated_at" db:"updated_at"`
-	OpportunityID     uuid.UUID      `json:"opportunity_id" db:"opportunity_id"`
-	Opportunity       Opportunity    `db:"-"`
+	ID               uuid.UUID      `json:"id" db:"id"`
+	CreatedAt        time.Time      `json:"created_at" db:"created_at"`
+	UpdatedAt        time.Time      `json:"updated_at" db:"updated_at"`
+	OpportunityID    uuid.UUID      `json:"opportunity_id" db:"opportunity_id"`
+	Opportunity      Opportunity    `db:"-"`
 	FatalAttributeID uuid.UUID      `json:"fatal_attribute_id" db:"fatal_attribute_id"`
-	FatalAttribute    FatalAttribute `db:"-"`
+	FatalAttribute   FatalAttribute `db:"-"`
 }
 
 // String is not required by pop and may be deleted

@@ -1,5 +1,0 @@
-create_table("opportunity_metrics", func(t) {
-	t.Column("id", "uuid", {"primary": true})
-	t.Column("opportunity_id", "uuid", {})
-	t.Column("metric_id", "uuid", {})
-})

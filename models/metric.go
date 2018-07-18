@@ -23,12 +23,8 @@ type Metric struct {
 	UpdatedAt     time.Time   `json:"updated_at" db:"updated_at"`
 	Name          string      `json:"name" db:"name"`
 	Weight        int         `json:"weight" db:"weight"`
-	ChosenValue   Value       `json:"value" belongs_to:"value"`
-	ChosenValueID uuid.UUID   `db:"chosen_value_id"`
-	ValueChoices  Values   `json:"choices" has_many:"values" fk_id:"metric_choice_id"`
+	ValueChoices  Values      `json:"choices" has_many:"values" fk_id:"metric_choice_id"`
 	Type          Type        `json:"type" db:"type"`
-	Opportunity   Opportunity `belongs_to:"opportunity"`
-	OpportunityID uuid.UUID   `db:"opportunity_id"`
 }
 
 // String is not required by pop and may be deleted
