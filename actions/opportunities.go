@@ -67,6 +67,17 @@ func (v OpportunitiesResource) Show(c buffalo.Context) error {
 		return c.Error(404, err)
 	}
 
+	for i, mv := range opportunity.MetricValues {
+		m := &models.Metric{}
+		v := &models.Value{}
+		tx.Eager().Find(m, mv.MetricID)
+		tx.Eager().Find(v, mv.ValueID)
+		mv.Metric = *m
+		mv.Value = *v
+		opportunity.MetricValues[i] = mv
+
+	}
+
 	return c.Render(200, r.Auto(c, opportunity))
 }
 
@@ -111,15 +122,14 @@ func (v OpportunitiesResource) Create(c buffalo.Context) error {
 
 	for _, v := range opportunity.MetricValues {
 
-   		v.OpportunityID = opportunity.ID
-   		v.MetricID = v.Metric.ID
-   		v.ValueID = v.Value.ID
+		mv := &models.MetricValue{}
+		mv.OpportunityID = opportunity.ID
+		mv.MetricID = v.Metric.ID
+		mv.ValueID = v.Value.ID
 
 		// link Metrics with The Opportunity
 
-
-       verrs, err = tx.ValidateAndCreate(v)
-
+		verrs, err = tx.ValidateAndCreate(mv)
 
 		if err != nil {
 			return errors.WithStack(err)

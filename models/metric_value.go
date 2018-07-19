@@ -13,9 +13,9 @@ type MetricValue struct {
 	ID            uuid.UUID `json:"id" db:"id"`
 	CreatedAt     time.Time `json:"created_at" db:"created_at"`
 	UpdatedAt     time.Time `json:"updated_at" db:"updated_at"`
-	Metric        Metric    `json:"metric" db:"-"`
+	Metric        Metric    `json:"metric" has_one:"metric"`
 	MetricID      uuid.UUID `json:"metric_id" db:"metric_id"`
-	Value         Value     `json:"value" db:"-"`
+	Value         Value     `json:"value"  has_one:"value"`
 	ValueID       uuid.UUID `json:"value_id" db:"value_id"`
 	OpportunityID uuid.UUID `json:"opportunity_id" db:"opportunity_id"`
 }

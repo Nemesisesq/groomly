@@ -114,6 +114,7 @@ var _ = Namespace("seed", func() {
 				log.Panic(err)
 			}
 			for _, v := range vals {
+				v.MetricChoiceID = met.ID
 				tx.Create(&v)
 				if err != nil {
 					log.Panic(err)
