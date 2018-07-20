@@ -19,6 +19,7 @@ type Opportunity struct {
 	BusinessCategory string          `json:"business_category" db:"business_category"`
 	MetricValues     MetricValues    `json:"metric_values" has_many:"metric_values"`
 	FatalAttributes  FatalAttributes `json:"fatal_attributes" many_to_many:"opportunity_fatal_attributes"`
+	Score            int             `json:"score" db:"-"`
 }
 
 // String is not required by pop and may be deleted
@@ -56,4 +57,23 @@ func (o *Opportunity) ValidateCreate(tx *pop.Connection) (*validate.Errors, erro
 // This method is not required and may be deleted.
 func (o *Opportunity) ValidateUpdate(tx *pop.Connection) (*validate.Errors, error) {
 	return validate.NewErrors(), nil
+}
+
+func (o *Opportunity) AfterFind(tx *pop.Connection) error {
+    var total  = 0
+    var fa = 0
+	for _,  v := range o.MetricValues {
+      x := v.Metric.Weight * v.Value.Score
+
+      total = total + x
+
+	}
+
+	for _, v := range o.FatalAttributes {
+		fa = fa + v.Weight
+	}
+
+	o.Score = total * fa
+
+	return nil
 }
