@@ -22,11 +22,11 @@
 </p>
 <p>
     <strong>Metrics</strong>
-    <%= for (metric) in opportunity.Metrics { %>
-<td> <%= metric.name %>
+    <%= for (mv) in opportunity.MetricValues { %>
+<td> <%= mv.Metric.Name %>
     <div class="pull-right">
-        <a href="<%= metricPath({ metric_id: metric.ID }) %>" class="btn btn-info">View</a>
-        <a href="<%= editMetricPath({ metric_id: metric.ID }) %>" class="btn btn-warning">Edit</a>
+        <a href="<%= metricValuePath({ metric_value_id: mv.ID }) %>" class="btn btn-info">View</a>
+        <a href="<%= editMetricValuePath({ metric_value_id: mv.ID }) %>" class="btn btn-warning">Edit</a>
     </div>
 </td>
 <% } %>
