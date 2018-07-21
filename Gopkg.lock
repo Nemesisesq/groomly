@@ -64,14 +64,20 @@
 [[projects]]
   name = "github.com/gobuffalo/buffalo"
   packages = [".","binding","middleware","middleware/csrf","middleware/i18n","middleware/ssl","render","servers","worker"]
-  revision = "7dd791f448a9ff897c3f63e2fc2008b184098c02"
-  version = "v0.12.0"
+  revision = "a98d8d494a063c87ad65c67dcd4b8d3d1d907c88"
+  version = "v0.12.4"
 
 [[projects]]
   name = "github.com/gobuffalo/envy"
   packages = ["."]
   revision = "2d0f467653f3d961ce9ada4d32a230bdcb3bfe11"
   version = "v1.6.3"
+
+[[projects]]
+  name = "github.com/gobuffalo/fizz"
+  packages = [".","translators"]
+  revision = "a68affc47dc7145d791149e996c379a0f46ee507"
+  version = "v1.0.2"
 
 [[projects]]
   name = "github.com/gobuffalo/makr"
@@ -88,20 +94,20 @@
 [[projects]]
   name = "github.com/gobuffalo/plush"
   packages = [".","ast","lexer","parser","token"]
-  revision = "6cd5bf0d0c9b3623f2a89a2832387c584fb5e274"
-  version = "v3.7.5"
+  revision = "2ec029f415ed9a8a1448a5bb389d79084d606035"
+  version = "v3.7.7"
 
 [[projects]]
   name = "github.com/gobuffalo/pop"
-  packages = [".","associations","columns","fizz","fizz/translators","nulls"]
-  revision = "786534c81bfec704cf40a4539771328327ce1875"
-  version = "v4.5.10"
+  packages = [".","associations","columns","fix","nulls"]
+  revision = "9936c00d4230dae87d8ac5cf73149d9de7b0e899"
+  version = "v4.6.1"
 
 [[projects]]
   name = "github.com/gobuffalo/suite"
   packages = [".","fix"]
-  revision = "e2e0134eb87394466461f262c7cb7027b9e332e0"
-  version = "v2.1.1"
+  revision = "e731d05da4535a4a3bd8f22fb7cd231d555e0a41"
+  version = "v2.1.2"
 
 [[projects]]
   name = "github.com/gobuffalo/tags"
@@ -210,12 +216,6 @@
   packages = ["."]
   revision = "67934945178ed6f7799c3a001e2dde57315558c2"
   version = "v1.0.0"
-
-[[projects]]
-  name = "github.com/mattn/anko"
-  packages = ["ast","core","internal/corelib","parser","vm"]
-  revision = "9bd0532a673bf760bb6cb5577b3b1574c96537a0"
-  version = "v0.0.5"
 
 [[projects]]
   name = "github.com/mattn/go-colorable"
