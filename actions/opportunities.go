@@ -43,7 +43,8 @@ func (v OpportunitiesResource) List(c buffalo.Context) error {
 	if err := q.Eager().All(opportunities); err != nil {
 		return errors.WithStack(err)
 	}
-
+	opportunities.PopulateMetricValues(tx)
+	opportunities.ComputeScore()
 	// Add the paginator to the context so it can be used in the template.
 	c.Set("pagination", q.Paginator)
 
@@ -67,16 +68,7 @@ func (v OpportunitiesResource) Show(c buffalo.Context) error {
 		return c.Error(404, err)
 	}
 
-	for i, mv := range opportunity.MetricValues {
-		m := &models.Metric{}
-		v := &models.Value{}
-		tx.Eager().Find(m, mv.MetricID)
-		tx.Eager().Find(v, mv.ValueID)
-		mv.Metric = *m
-		mv.Value = *v
-		opportunity.MetricValues[i] = mv
-
-	}
+	opportunity.PopulateMetricValues(tx)
 
 	return c.Render(200, r.Auto(c, opportunity))
 }
@@ -119,34 +111,25 @@ func (v OpportunitiesResource) Create(c buffalo.Context) error {
 		return c.Render(422, r.Auto(c, opportunity))
 	}
 	// create metrics
+	verrs, err = opportunity.CreateMetricValues(tx)
 
-	for _, v := range opportunity.MetricValues {
+	if err != nil {
+		return errors.WithStack(err)
+	}
 
-		mv := &models.MetricValue{}
-		mv.OpportunityID = opportunity.ID
-		mv.MetricID = v.Metric.ID
-		mv.ValueID = v.Value.ID
+	if verrs.HasAny() {
+		// Make the errors available inside the html template
+		c.Set("errors", verrs)
 
-		// link Metrics with The Opportunity
-
-		verrs, err = tx.ValidateAndCreate(mv)
-
-		if err != nil {
-			return errors.WithStack(err)
-		}
-
-		if verrs.HasAny() {
-			// Make the errors available inside the html template
-			c.Set("errors", verrs)
-
-			// Render again the new.html template that the user can
-			// correct the input.
-			return c.Render(422, r.Auto(c, opportunity))
-		}
+		// Render again the new.html template that the user can
+		// correct the input.
+		return c.Render(422, r.Auto(c, opportunity))
 	}
 
 	// If there are no errors set a success message
 	c.Flash().Add("success", "Opportunity was created successfully")
+
+	opportunity.ComputeScore()
 
 	// and redirect to the opportunities index page
 	return c.Render(201, r.Auto(c, opportunity))
@@ -202,6 +185,21 @@ func (v OpportunitiesResource) Update(c buffalo.Context) error {
 		c.Set("errors", verrs)
 
 		// Render again the edit.html template that the user can
+		// correct the input.
+		return c.Render(422, r.Auto(c, opportunity))
+	}
+
+	verrs, err = opportunity.UpdateMetricValues(tx)
+
+	if err != nil {
+		return errors.WithStack(err)
+	}
+
+	if verrs.HasAny() {
+		// Make the errors available inside the html template
+		c.Set("errors", verrs)
+
+		// Render again the new.html template that the user can
 		// correct the input.
 		return c.Render(422, r.Auto(c, opportunity))
 	}

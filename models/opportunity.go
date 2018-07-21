@@ -8,6 +8,7 @@ import (
 	"github.com/gobuffalo/uuid"
 	"github.com/gobuffalo/validate"
 	"github.com/gobuffalo/validate/validators"
+	"github.com/pkg/errors"
 )
 
 type Opportunity struct {
@@ -59,9 +60,9 @@ func (o *Opportunity) ValidateUpdate(tx *pop.Connection) (*validate.Errors, erro
 	return validate.NewErrors(), nil
 }
 
-func (o *Opportunity) AfterFind(tx *pop.Connection) error {
+func (o *Opportunity) ComputeScore() error {
     var total  = 0
-    var fa = 0
+    var fa = 1
 	for _,  v := range o.MetricValues {
       x := v.Metric.Weight * v.Value.Score
 
@@ -76,4 +77,76 @@ func (o *Opportunity) AfterFind(tx *pop.Connection) error {
 	o.Score = total * fa
 
 	return nil
+}
+func (os Opportunities) ComputeScore()  {
+
+	for key, v := range os {
+		v.ComputeScore()
+		os[key] = v
+		print(key)
+	}
+
+	println(os)
+}
+
+func (opportunity *Opportunity)PopulateMetricValues(tx *pop.Connection) {
+	for i, mv := range opportunity.MetricValues {
+		m := &Metric{}
+		v := &Value{}
+		tx.Eager().Find(m, mv.MetricID)
+		tx.Eager().Find(v, mv.ValueID)
+		mv.Metric = *m
+		mv.Value = *v
+		opportunity.MetricValues[i] = mv
+
+	}
+}
+
+func(os *Opportunities)PopulateMetricValues(tx *pop.Connection){
+	for _, v := range *os {
+		v.PopulateMetricValues(tx)
+	}
+}
+
+func (o *Opportunity)CreateMetricValues(tx *pop.Connection) (verrs *validate.Errors, err error){
+	for _, v := range o.MetricValues {
+
+		mv := MetricValue{}
+		mv.OpportunityID = o.ID
+		mv.MetricID = v.Metric.ID
+		mv.ValueID = v.Value.ID
+
+		// link Metrics with The Opportunity
+
+		verrs, err = tx.ValidateAndCreate(mv)
+
+		if err != nil || verrs.HasAny() {
+			return verrs, errors.WithStack(err)
+		}
+	}
+
+	return verrs, err
+
+}
+
+func (o *Opportunity)UpdateMetricValues(tx *pop.Connection) (verrs *validate.Errors, err error){
+	for _, v := range o.MetricValues {
+
+		mv := &MetricValue{}
+		mv.ID = v.ID
+		mv.OpportunityID = o.ID
+		mv.MetricID = v.Metric.ID
+		mv.ValueID = v.Value.ID
+
+		// link Metrics with The Opportunity
+
+		verrs, err = tx.ValidateAndUpdate(mv)
+
+		if err != nil || verrs.HasAny() {
+			return verrs, errors.WithStack(err)
+		}
+	}
+
+	return verrs, err
+
 }
