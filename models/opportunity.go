@@ -20,7 +20,8 @@ type Opportunity struct {
 	BusinessCategory string          `json:"business_category" db:"business_category"`
 	MetricValues     MetricValues    `json:"metric_values" has_many:"metric_values"`
 	FatalAttributes  FatalAttributes `json:"fatal_attributes" many_to_many:"opportunity_fatal_attributes"`
-	Score            int             `json:"score" db:"-"`
+	ValueScore       int             `json:"value_score" db:"-"`
+	EffortScore      int             `json:"effort_score" db:"-"`
 }
 
 // String is not required by pop and may be deleted
@@ -61,12 +62,24 @@ func (o *Opportunity) ValidateUpdate(tx *pop.Connection) (*validate.Errors, erro
 }
 
 func (o *Opportunity) ComputeScore() error {
-    var total  = 0
-    var fa = 1
-	for _,  v := range o.MetricValues {
-      x := v.Metric.Weight * v.Value.Score
+	value := 0
+	effort := 0
+	fa := 1
+	for _, v := range o.MetricValues {
 
-      total = total + x
+		if v.Metric.Type == Benefit {
+
+			x := v.Metric.Weight * v.Value.Score
+
+			value = value + x
+		} else {
+			if v.Metric.Weight == 0 {
+				v.Metric.Weight = 1
+			}
+			x := v.Metric.Weight * v.Value.Score
+
+			effort = effort + x
+		}
 
 	}
 
@@ -74,11 +87,12 @@ func (o *Opportunity) ComputeScore() error {
 		fa = fa + v.Weight
 	}
 
-	o.Score = total * fa
+	o.ValueScore = value * fa
+	o.EffortScore = effort
 
 	return nil
 }
-func (os Opportunities) ComputeScore()  {
+func (os Opportunities) ComputeScore() {
 
 	for key, v := range os {
 		v.ComputeScore()
@@ -89,7 +103,7 @@ func (os Opportunities) ComputeScore()  {
 	println(os)
 }
 
-func (opportunity *Opportunity)PopulateMetricValues(tx *pop.Connection) {
+func (opportunity *Opportunity) PopulateMetricValues(tx *pop.Connection) {
 	for i, mv := range opportunity.MetricValues {
 		m := &Metric{}
 		v := &Value{}
@@ -102,13 +116,13 @@ func (opportunity *Opportunity)PopulateMetricValues(tx *pop.Connection) {
 	}
 }
 
-func(os *Opportunities)PopulateMetricValues(tx *pop.Connection){
+func (os *Opportunities) PopulateMetricValues(tx *pop.Connection) {
 	for _, v := range *os {
 		v.PopulateMetricValues(tx)
 	}
 }
 
-func (o *Opportunity)CreateMetricValues(tx *pop.Connection) (verrs *validate.Errors, err error){
+func (o *Opportunity) CreateMetricValues(tx *pop.Connection) (verrs *validate.Errors, err error) {
 	for _, v := range o.MetricValues {
 
 		mv := MetricValue{}
@@ -129,7 +143,7 @@ func (o *Opportunity)CreateMetricValues(tx *pop.Connection) (verrs *validate.Err
 
 }
 
-func (o *Opportunity)UpdateMetricValues(tx *pop.Connection) (verrs *validate.Errors, err error){
+func (o *Opportunity) UpdateMetricValues(tx *pop.Connection) (verrs *validate.Errors, err error) {
 	for _, v := range o.MetricValues {
 
 		mv := &MetricValue{}
