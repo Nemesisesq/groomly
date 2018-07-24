@@ -125,7 +125,7 @@ func (os *Opportunities) PopulateMetricValues(tx *pop.Connection) {
 func (o *Opportunity) CreateMetricValues(tx *pop.Connection) (verrs *validate.Errors, err error) {
 	for _, v := range o.MetricValues {
 
-		mv := MetricValue{}
+		mv := &MetricValue{}
 		mv.OpportunityID = o.ID
 		mv.MetricID = v.Metric.ID
 		mv.ValueID = v.Value.ID
