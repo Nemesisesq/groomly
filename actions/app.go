@@ -52,13 +52,22 @@ func App() *buffalo.App {
 		//  c.Value("tx").(*pop.PopTransaction)
 		// Remove to disable this.
 		app.Use(middleware.PopTransaction(models.DB))
+		app.Use(SetCurrentUser)
 
 		// Setup and use translations:
 		app.Use(translations())
 
 		app.GET("/", HomeHandler)
+
+		app.GET("/users/new", UsersNew)
+		app.POST("/users", UsersCreate)
+		app.GET("/signin", AuthNew)
+		app.POST("/signin", AuthCreate)
+		app.DELETE("/signout", AuthDestroy)
 		//API endpoints
 		api := app.Group("/api")
+		api.Use(ValidateTokensFromHeader)
+
 		api.Resource("/opportunities", OpportunitiesResource{})
 		api.Resource("/metrics", MetricsResource{})
 		api.Resource("/values", ValuesResource{})
@@ -73,10 +82,13 @@ func App() *buffalo.App {
 		app.Resource("/fatal_attributes", FatalAttributesResource{})
 		app.Resource("/project_reports", ProjectReportsResource{})
 		app.Resource("/project_reports", ProjectReportsResource{})
-		
+
 		app.Resource("/metric_values", MetricValuesResource{})
 		app.Resource("/opportunity_fatal_attributes", OpportunityFatalAttributesResource{})
 		app.Resource("/metric_values", MetricValuesResource{})
+		app.Resource("/users", UsersResource{})
+
+		app.GET("/token_auth/login", TokenAuthLogin)
 		app.ServeFiles("/", assetsBox) // serve files from the public directory
 	}
 

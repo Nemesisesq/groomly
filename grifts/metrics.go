@@ -3,6 +3,7 @@ package grifts
 import (
 	"log"
 
+	"github.com/gobuffalo/envy"
 	"github.com/gobuffalo/pop"
 	. "github.com/markbates/grift/grift"
 	"github.com/nemesisesq/groomly/models"
@@ -100,8 +101,8 @@ var _ = Namespace("seed", func() {
 					{Name: "Extra Large", Score: 4},
 				}},
 		}
-
-		tx, err := pop.Connect("development")
+		env := envy.Get("GO_ENV", "development")
+		tx, err := pop.Connect(env)
 		if err != nil {
 			log.Panic(err)
 		}

@@ -14,6 +14,12 @@
   version = "v0.3.0"
 
 [[projects]]
+  name = "github.com/SermoDigital/jose"
+  packages = [".","crypto","jws","jwt"]
+  revision = "f6df55f235c24f236d11dbcf665249a59ac2021f"
+  version = "1.1"
+
+[[projects]]
   name = "github.com/ajg/form"
   packages = ["."]
   revision = "cc2954064ec9ea8d93917f0f87456e11d7b881ad"
@@ -254,6 +260,12 @@
   version = "v3.0"
 
 [[projects]]
+  branch = "master"
+  name = "github.com/nemesisesq/vaux_server"
+  packages = ["models"]
+  revision = "f2be1dfc86f87a3b166b96576790a10f3a9f7052"
+
+[[projects]]
   name = "github.com/nicksnyder/go-i18n"
   packages = ["i18n","i18n/bundle","i18n/language","i18n/translation"]
   revision = "0dc1626d56435e9d605a29875701721c54bc9bbd"
@@ -418,6 +430,6 @@
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "df630e6f55c9da553fb4731569132a5f156ca4e22a9b07a4a156c641cad0bf03"
+  inputs-digest = "d8d79baa2e8e78ee329aaccb1951807f86ef0875709fd3a3b52ace938913772e"
   solver-name = "gps-cdcl"
   solver-version = 1
