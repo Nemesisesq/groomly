@@ -7,16 +7,16 @@
 
 <table class="table table-striped">
   <thead>
+  <th>Name</th>
   <th>Weight</th>
-    <th>Value</th>
     <th>Type</th>
     <th>&nbsp;</th>
   </thead>
   <tbody>
     <%= for (metric) in metrics { %>
       <tr>
+          <td><%= metric.Name %></td>
       <td><%= metric.Weight %></td>
-        <td><%= metric.Value %></td>
         <td><%= metric.Type %></td>
         <td>
           <div class="pull-right">

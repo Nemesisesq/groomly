@@ -76,7 +76,32 @@ func (v OpportunitiesResource) Show(c buffalo.Context) error {
 // New renders the form for creating a new Opportunity.
 // This function is mapped to the path GET /opportunities/new
 func (v OpportunitiesResource) New(c buffalo.Context) error {
-	return c.Render(200, r.Auto(c, &models.Opportunity{}))
+	opportunity := &models.Opportunity{}
+
+	tx, ok := c.Value("tx").(*pop.Connection)
+	if !ok {
+		return errors.WithStack(errors.New("no transaction found"))
+	}
+
+	metrics := &models.Metrics{}
+
+	// Paginate results. Params "page" and "per_page" control pagination.
+	// Default values are "page=1" and "per_page=20".
+	q := tx.PaginateFromParams(c.Params())
+
+	// Retrieve all Metrics from the DB
+	if err := q.Eager().All(metrics); err != nil {
+		return errors.WithStack(err)
+	}
+
+	for _, v := range *metrics {
+
+	opportunity.MetricValues = append(opportunity.MetricValues, models.MetricValue{Metric:v})
+
+	}
+
+
+	return c.Render(200, r.Auto(c, opportunity))
 }
 
 // Create adds a Opportunity to the DB. This function is mapped to the
