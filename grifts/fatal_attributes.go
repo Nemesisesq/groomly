@@ -6,6 +6,7 @@ import (
 	"github.com/gobuffalo/pop"
 	. "github.com/markbates/grift/grift"
 	"github.com/nemesisesq/groomly/models"
+	"github.com/gobuffalo/envy"
 )
 
 var _ = Namespace("seed", func() {
@@ -17,7 +18,8 @@ var _ = Namespace("seed", func() {
 			{Name: "Regulatory", Summary: "The Goverment really cares about this one"},
 		}
 
-		tx, err := pop.Connect("development")
+		env := envy.Get("GO_ENV", "development")
+		tx, err := pop.Connect(env)
 		if err != nil {
 			log.Panic(err)
 		}
