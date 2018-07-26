@@ -137,6 +137,8 @@ func (v OpportunitiesResource) Create(c buffalo.Context) error {
 	}
 	// create metrics
 	verrs, err = opportunity.CreateMetricValues(tx)
+	//create fatal_attributes
+	verrs, err = opportunity.SaveOpportunityFatalAttributes(tx)
 
 	if err != nil {
 		return errors.WithStack(err)
@@ -215,6 +217,7 @@ func (v OpportunitiesResource) Update(c buffalo.Context) error {
 	}
 
 	verrs, err = opportunity.UpdateMetricValues(tx)
+	verrs, err = opportunity.SaveOpportunityFatalAttributes(tx)
 
 	if err != nil {
 		return errors.WithStack(err)

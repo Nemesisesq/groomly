@@ -164,3 +164,22 @@ func (o *Opportunity) UpdateMetricValues(tx *pop.Connection) (verrs *validate.Er
 	return verrs, err
 
 }
+
+func (o *Opportunity) SaveOpportunityFatalAttributes(tx *pop.Connection) (verrs *validate.Errors, err error) {
+	for _, v := range o.FatalAttributes {
+
+		ofa := &OpportunityFatalAttribute{}
+		ofa.ID = v.ID
+		ofa.OpportunityID = o.ID
+		ofa.FatalAttributeID = v.ID
+
+		verrs, err = tx.ValidateAndCreate(ofa)
+
+		if err != nil || verrs.HasAny() {
+			return verrs, errors.WithStack(err)
+		}
+	}
+
+	return verrs, err
+
+}
